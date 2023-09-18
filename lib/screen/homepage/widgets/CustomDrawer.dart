@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rpg_app/service/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+  const CustomDrawer(
+      {super.key, required this.currentIndex});
+  final int currentIndex;
+
+  static const Map<String, IconData> datas = {
+    "Profil": Icons.padding,
+    "Formations": Icons.padding,
+    "Messages": Icons.padding,
+    "Daily mission": Icons.padding,
+    "Dashboard": Icons.dashboard
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -11,31 +23,18 @@ class CustomDrawer extends StatelessWidget {
           const DrawerHeader(
             child: Icon(Icons.favorite),
           ),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text("Profil"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.panorama_wide_angle_select_outlined),
-            title: Text("Formations"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.message),
-            title: Text("Messages"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.calendar_month),
-            title: Text("Daily mission"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.dashboard),
-            title: Text("Dashboard"),
-            tileColor: Colors.grey[300],
-            onTap: () {},
+          Column(
+            children: datas.entries.map((e) {
+              int index = datas.keys.toList().indexOf(e.key);
+              return ListTile(
+                leading: Icon(e.value),
+                title: Text(e.key),
+                tileColor: (currentIndex == index)
+                    ? Colors.grey[300]
+                    : Colors.grey[100],
+                onTap: () => Provider.of<CustomProvider>(context,listen: false).changeIndex(index),
+              );
+            }).toList(),
           ),
           const Spacer(),
           ListTile(

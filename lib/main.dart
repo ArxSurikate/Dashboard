@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rpg_app/service/provider.dart';
 import 'package:rpg_app/service/router.dart';
 import 'package:rpg_app/service/theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => CustomProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

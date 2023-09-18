@@ -1,9 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:rpg_app/responsivelayout.dart';
 /* HomePage */
-import 'package:rpg_app/screen/homepage/desktop_homepage.dart';
-import 'package:rpg_app/screen/homepage/mobile_homepage.dart';
-import 'package:rpg_app/screen/homepage/tablet_homepage.dart';
+import 'package:rpg_app/screen/homepage/homepage.dart';
 
 class CustomRouter {
   static const String HomePageView = "/";
@@ -14,11 +12,7 @@ class CustomRouter {
     GoRoute(
       path: HomePageView,
       builder: (context, state) {
-        return const ResponsiveLayout(
-          mobileScaffold: MobileHomePage(),
-          desktopScaffold: DesktopHomePage(),
-          tabletScaffold: TabletHomePage(),
-        );
+        return const HomePage();
       },
     )
   ]);
